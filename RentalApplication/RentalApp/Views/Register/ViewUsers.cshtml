@@ -1,0 +1,74 @@
+﻿@model IEnumerable<RentalApp.Models.DataModels.User>
+
+@{
+    ViewBag.Title = "Registered Users";
+}
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li>@Html.ActionLink("Dashboard", "AdminDashboard", new { Controller = "Dashboard", @Id = ViewBag.UserId })</li>
+                    <li style="padding-left: 250px;">@Html.ActionLink("Logout", "SignOut", new { Controller = "Login" })</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+<h2>List of Registered Users</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.UserName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Email)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PhoneNumber)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.UserStatus)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.UserName)
+        </td>        
+        <td>
+            @Html.DisplayFor(modelItem => item.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Email)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PhoneNumber)
+        </td>       
+        <td>
+            @if (item.UserStatus == 1)
+            {
+                @Html.DisplayName("Active")
+            }
+            else if (item.UserStatus == 2)
+            {
+                @Html.DisplayName("InActive")
+            }
+        </td>
+        <td>           
+        </td>
+    </tr>
+}
+
+</table>

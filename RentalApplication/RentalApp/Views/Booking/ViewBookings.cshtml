@@ -1,0 +1,103 @@
+﻿@model IEnumerable<RentalApp.Models.DataModels.Booking>
+
+@{
+    ViewBag.Title = "Bookings";
+    int UserId = ViewBag.UserId;
+}
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li>@Html.ActionLink("Dashboard", "VendorDashboard", new { Controller = "Dashboard", @Id = UserId })</li>                   
+                    <li style="padding-left: 250px;">@Html.ActionLink("Logout", "SignOut", new { Controller = "Login" })</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div>
+        <h2>View Bookings</h2>
+
+        <table class="table">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.BookingId)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.BookingDate)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.BookingFrom)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Vehicle.Model)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.User.Name)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.NoOfDays)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.AdvanceAmount)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.TotalAmount)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.BookingStatus)
+                </th>
+                <th></th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.BookingId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BookingDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BookingFrom)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Vehicle.Model)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.User.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NoOfDays)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AdvanceAmount)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TotalAmount)
+            </td>
+            <td>
+                @if (item.BookingStatus == 1)
+                {
+                    @Html.DisplayName("Booked")
+                }
+                else if (item.BookingStatus == 2)
+                {
+                    @Html.DisplayName("Canceled")
+                }
+                else if (item.BookingStatus == 3)
+                {
+                    @Html.DisplayName("Deleted")
+                }
+            </td>
+        </tr>
+            }
+        </table>        
+    </div>

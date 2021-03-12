@@ -1,0 +1,33 @@
+﻿@{
+    ViewBag.Title = "Home";
+}
+
+<div class="jumbotron">
+    <h1>RentalApp</h1>
+    <p class="lead">RentalApp is a leading Rental management system which is largely used by corporates and other indivuals Professionals. Register with us for more information.</p>
+    <p class="btn btn-default">@Html.ActionLink("Sign In", "Index", "Login")</p>
+</div>
+
+<div class="row">
+    <div class="col-md-4">
+        <h2>For User Register</h2>
+        <p>
+            RentalApp is a leading Rental management system
+            which is largely used by corporates and other indivuals Professionals.
+        </p>
+        <p class="btn btn-default">@Html.ActionLink("SignUp", "RegisterUser", "Register")</p>
+    </div>
+    <div class="col-md-4">
+        <h2>Business Vendors</h2>
+        <p>
+            RentalApp is a leading Rental management system
+            which is largely used by corporates and other indivuals Professionals.
+        </p>
+        <p class="btn btn-default">@Html.ActionLink("Register", "RegisterVendor", new { controller= "Register", @UserId = -1 })</p>
+    </div>
+    <div class="col-md-4">
+        <h2>For Bookings</h2>
+        <p>You can easily find a Rental Vehicle that offers the right mix of features with luxury and comfort with affordable price tariff.</p>
+        <p class ="btn btn-default">@Html.ActionLink("Learn more", "RegisterUser", "Register")</p>
+</div>
+</div>

@@ -1,0 +1,86 @@
+﻿@model  RentalApp.Models.ViewModels.VendorDashboardView
+
+@{
+    ViewBag.Title = "Vendor Dashboard";
+}
+
+<h2>Welcome : @ViewBag.Name</h2>
+
+<div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+        </div>
+        <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+                <li>@Html.ActionLink("Dashboard", "VendorDashboard", new { Controller = "Dashboard" })</li>                
+                <li>@Html.ActionLink("Edit MyDetails", "EditVendorDetail", new { Controller = "Register", @UserId = ViewBag.UserId })</li>
+                <li style="padding-left: 250px;">@Html.ActionLink("Logout", "SignOut", new { Controller = "Login" })</li>
+            </ul>
+        </div>
+    </div>
+</div>
+<div>
+    <h3>Vehicles Lists</h3>
+    <table class="table">
+        <tr>
+            <th>Registration No</th>
+            <th>Make</th>
+            <th>Model</th>
+            <th>Year</th>
+            <th>Fuel Type</th>
+            <th>Color</th>
+            <th>Rent/Day</th>
+            <th>Status</th>            
+            <th>Trip Booking Details</th>
+        </tr>
+        @foreach (var item in Model.VendorOwnedVehicles)
+        {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.RegistrationNo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Make)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Model)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ManufactureYear)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Type)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Color)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.RentPerDay)
+        </td>
+        <td>
+            @if (item.Status == 1)
+            {
+                @Html.DisplayName("Active")
+            }
+            else if (item.Status == 2)
+            {
+                @Html.DisplayName("InActive")
+            }
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { controller = "Vehicle", @VehicleId = item.VehicleId, @UserId = ViewBag.UserId }) |
+            @if(item.Status == 1)
+            {
+                @Html.ActionLink("Delete |", "Delete", new { controller = "Vehicle", @VehicleId = item.VehicleId, @UserId = ViewBag.UserId })
+            }
+            @Html.ActionLink("View Bookings", "ViewBookings", new { controller = "Booking", @VehicleId = item.VehicleId, @UserId = ViewBag.UserId })
+        </td>
+    </tr>
+        }
+        </table>
+</div>

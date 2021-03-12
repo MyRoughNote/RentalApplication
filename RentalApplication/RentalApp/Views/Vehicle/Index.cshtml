@@ -1,0 +1,112 @@
+﻿@model IEnumerable<RentalApp.Models.DataModels.Vehicle>
+
+@{
+    ViewBag.Title = "Vehicles";
+}
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    @if (ViewBag.UserRole == "Admin")
+                    {
+                        <li>@Html.ActionLink("Dashboard", "AdminDashboard", new { Controller = "Dashboard", @Id = ViewBag.UserId })</li>
+                        <li>@Html.ActionLink("Add Vehicle", "AddVehicle", new { Controller = "Vehicle", @UserId = ViewBag.UserId })</li>
+                    }
+                    else
+                    {
+                        <li>@Html.ActionLink("Dashboard", "UserDashboard", new { Controller = "Dashboard", @Id = ViewBag.UserId })</li>
+                    }
+                    <li style="padding-left: 250px;">@Html.ActionLink("Logout", "SignOut", new { Controller = "Login" })</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div>
+        <h2>List of Registered Vehicles</h2>
+        <table class="table">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.RegistrationNo)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ManufactureYear)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Make)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Model)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Color)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Type)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.RentPerDay)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Status)
+                </th>     
+                <th></th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.RegistrationNo)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ManufactureYear)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Make)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Model)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Color)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Type)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.RentPerDay)
+                    </td>
+                    <td>
+                        @if(item.Status == 1)
+                        {
+                            @Html.DisplayName("Active")
+                        }
+                        else if(item.Status == 2)
+                        {
+                            @Html.DisplayName("InActive")
+                        }
+                    </td>
+                    @if (ViewBag.UserRole == "Admin")
+                    {
+                        <td>
+                            @Html.ActionLink("Edit", "Edit", new { @VehicleId = item.VehicleId, @UserId = ViewBag.UserId }) |
+                            @*@Html.ActionLink("Details", "Details", new { @VehicleId = item.VehicleId, @UserId = ViewBag.UserId }) |*@
+                            @if (item.Status == 1)
+                            {
+                                @Html.ActionLink("Delete", "Delete", new { @VehicleId = item.VehicleId, @UserId = ViewBag.UserId })
+                            }
+                        </td>
+                    }
+                </tr>
+            }
+
+        </table>
+    </div>
